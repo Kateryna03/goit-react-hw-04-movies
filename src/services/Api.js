@@ -34,3 +34,10 @@ export const fetchImages = (searchName = '', searchPage = '1') => {
       DEFAULT_REQUEST_PARAM,
   );
 };
+
+//MOVIES/////////////////////////////
+// const API_KEY = '63c12b78041730b117a3f2cfecd7cee2';
+// Example API Request
+// https://api.themoviedb.org/3/movie/550?api_key=63c12b78041730b117a3f2cfecd7cee2
+// API Read Access Token(v4 auth)
+// eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2M2MxMmI3ODA0MTczMGIxMTdhM2YyY2ZlY2Q3Y2VlMiIsInN1YiI6IjYxMzY1NDlkYjg0Zjk0MDAyYTRjODIzZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.akCuHPgdSsn-b3IA91JVkQbQQe-nLKhYQfD2_AQNYYc
