@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 //import { useParams} from 'react-router-dom';
 import * as moviesAPI from '../../services/Api';
-
+import s from './Cast.module.css';
 function Cast({ movieId }) {
   //const { url } = useRouteMatch();
   const [cast, setCast] = useState(null);
@@ -19,7 +19,15 @@ function Cast({ movieId }) {
         <ul>
           {cast.map(men => (
             <li key={men.id}>
-              <img src={men.poster_path} alt={men.name} />
+              {men.profile_path && (
+                <img
+                  className={s.photo}
+                  //src={`https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg`}
+                  src={`https://image.tmdb.org/t/p/w300${men.profile_path}`}
+                  alt={men.name}
+                />
+              )}
+
               <h3>{men.name}</h3>
               <p>Character: {men.character}</p>
             </li>

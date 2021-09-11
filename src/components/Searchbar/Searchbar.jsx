@@ -2,11 +2,20 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+//import * as moviesAPI from '../../services/Api';
 import styles from './Searchbar.module.css';
 
 // Компонент принимает один проп onSubmit - функцию для передачи значения инпута при сабмите формы. Создает DOM-элемент следующей структуры.
 function Searchbar({ onSubmit }) {
   const [request, setRequest] = useState('');
+  // const [movies, setMovies] = useState([]);
+
+  // useEffect(() => {
+  //   //if (!request) return;
+  //   moviesAPI.fetchonSearch(request).then(data => setMovies(data.results));
+
+  // }, [request]);
+  // //console.log(movies);
 
   const handleChangeInput = e => {
     setRequest(e.currentTarget.value.toLowerCase());

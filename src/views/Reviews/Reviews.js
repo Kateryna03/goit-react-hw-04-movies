@@ -4,7 +4,7 @@ import * as moviesAPI from '../../services/Api';
 
 function Reviews({ movieId }) {
   //const { url } = useRouteMatch();
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
   //const { movieId } = useParams();
 
   useEffect(() => {
@@ -14,19 +14,21 @@ function Reviews({ movieId }) {
   console.log(reviews);
 
   return (
-    <>
-      {reviews && (
+    <div>
+      {reviews.length > 0 ? (
         <ul>
-          {reviews.map(review => (
-            <li key={review.id}>
+          {reviews.map(({ id, author, content }) => (
+            <li key={id}>
               {/* <img src={men.poster_path} alt={men.name} /> */}
-              <h3>{review.author}</h3>
-              <p>Content: {review.content}</p>
+              <h3>{author}</h3>
+              <p>Content: {content}</p>
             </li>
           ))}
         </ul>
+      ) : (
+        <p>We don't have any reviews for this movie.</p>
       )}
-    </>
+    </div>
   );
 }
 export default Reviews;
