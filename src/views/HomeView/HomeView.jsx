@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+//mport { Link } from 'react-router-dom';
 import * as moviesAPI from '../../services/Api';
+import MovieList from '../MovieList/MovieList';
 //import PageHeading from '../components/PageHeading/PageHeading';
 
 function HomeView() {
@@ -16,7 +17,8 @@ function HomeView() {
   return (
     <>
       <h1>TRENDING TODAY</h1>
-      {movies && (
+      <MovieList movies={movies}></MovieList>
+      {/* {movies && (
         <ul>
           {movies.map(movie => (
             <li key={movie.id}>
@@ -24,7 +26,7 @@ function HomeView() {
             </li>
           ))}
         </ul>
-      )}
+      )} */}
     </>
   );
 }

@@ -1,21 +1,26 @@
 //import React, { Component } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-//import * as moviesAPI from '../../services/Api';
+//import * as moviesAPI from '../../services/Api'
 import styles from './Searchbar.module.css';
 
 // Компонент принимает один проп onSubmit - функцию для передачи значения инпута при сабмите формы. Создает DOM-элемент следующей структуры.
 function Searchbar({ onSubmit }) {
+  const history = useHistory();
+  console.log(history);
+  const location = useLocation();
+  console.log(location);
   const [request, setRequest] = useState('');
-  // const [movies, setMovies] = useState([]);
+  //const [movies, setMovies] = useState([]);
 
   // useEffect(() => {
-  //   //if (!request) return;
-  //   moviesAPI.fetchonSearch(request).then(data => setMovies(data.results));
+  //   if (!request) return;
+  //   moviesAPI.fetchSearch(request).then((data) => setMovies(data.result));
 
   // }, [request]);
-  // //console.log(movies);
+  // console.log(movies);
 
   const handleChangeInput = e => {
     setRequest(e.currentTarget.value.toLowerCase());
@@ -42,6 +47,9 @@ function Searchbar({ onSubmit }) {
     }
     onSubmit(request);
     setRequest('');
+
+    history.push({ ...location, search: `query=${request}` });
+    console.log(history);
   };
 
   return (
@@ -56,7 +64,7 @@ function Searchbar({ onSubmit }) {
           type="text"
           autoComplete="off"
           autoFocus
-          placeholder="Search images and photos"
+          placeholder="Input your query..."
           value={request}
           onChange={handleChangeInput}
         />

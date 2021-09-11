@@ -77,8 +77,8 @@ export function fetchReviews(movieId) {
 }
 // `/movie/${id}?api_key=${apiKey}&language=en-US`
 
-export function fetchOnSearch(search) {
+export function fetchSearch(request) {
   return fetchWithErrorHandling(
-    `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${search}`,
+    `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${request}`,
   );
 }
