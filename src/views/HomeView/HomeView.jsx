@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-//mport { Link } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 import * as moviesAPI from '../../services/Api';
 import MovieList from '../MovieList/MovieList';
 //import PageHeading from '../components/PageHeading/PageHeading';
@@ -7,6 +7,8 @@ import MovieList from '../MovieList/MovieList';
 function HomeView() {
   //const { url } = useRouteMatch();
   const [movies, setMovies] = useState(null);
+  //const history = useHistory()
+  // history.push('/')
 
   useEffect(() => {
     //console.log(movies);
@@ -17,7 +19,7 @@ function HomeView() {
   return (
     <>
       <h1>TRENDING TODAY</h1>
-      <MovieList movies={movies}></MovieList>
+      <MovieList movies={movies}> </MovieList>
       {/* {movies && (
         <ul>
           {movies.map(movie => (
@@ -31,28 +33,3 @@ function HomeView() {
   );
 }
 export default HomeView;
-
-// export default function BooksView() {
-//   const { url } = useRouteMatch();
-//   const [books, setBooks] = useState(null);
-
-//   useEffect(() => {
-//     bookShelfAPI.fetchBooks().then(setBooks);
-//   }, []);
-
-//   return (
-//     <>
-//       <PageHeading text="Книги" />
-
-//       {books && (
-//         <ul>
-//           {books.map(book => (
-//             <li key={book.id}>
-//               <Link to={`${url}/${book.id}`}>{book.title}</Link>
-//             </li>
-//           ))}
-//         </ul>
-//       )}
-//     </>
-//   );
-// }

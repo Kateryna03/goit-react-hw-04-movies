@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import Searchbar from '../../components/Searchbar/Searchbar';
 import MovieList from '../MovieList/MovieList';
 import * as moviesAPI from '../../services/Api';
@@ -6,6 +7,8 @@ import * as moviesAPI from '../../services/Api';
 function MoviesPage() {
   const [movies, setMovies] = useState(null);
   const [request, setRequest] = useState('');
+  const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     if (!request) return;
@@ -30,6 +33,7 @@ function MoviesPage() {
       {/* <h1>MOVIES</h1> */}
       <Searchbar onSubmit={handleFormSubmit}></Searchbar>
       <MovieList movies={movies}></MovieList>
+      {/* page={`/movies?query=${request} */}
     </>
   );
 }

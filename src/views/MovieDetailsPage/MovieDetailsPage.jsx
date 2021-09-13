@@ -1,16 +1,24 @@
 import { useState, useEffect } from 'react';
+import { lazy, Suspense } from 'react';
 import {
   NavLink,
   useParams,
   useRouteMatch,
   Route,
   Switch,
+  useHistory,
+  useLocation,
 } from 'react-router-dom';
 import * as moviesAPI from '../../services/Api';
-import Cast from '../Cast/Cast';
-import Reviews from '../Reviews/Reviews';
+//import Cast from '../Cast/Cast';
+//import Reviews from '../Reviews/Reviews';
+import Loader from '../../components/Loader/Loader';
 import s from './MovieDetailsPage.module.css';
-function MovieDetailsPage() {
+const Cast = lazy(() => import('../Cast/Cast.js'));
+const Reviews = lazy(() => import('../Reviews/Reviews.js'));
+function MovieDetailsPage(page) {
+  const history = useHistory();
+  const location = useLocation();
   const { url } = useRouteMatch();
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
@@ -20,15 +28,28 @@ function MovieDetailsPage() {
   }, [movieId]);
   console.log(movie);
 
+  const handleGoBack = () => {
+    history.push(location?.state?.from ?? '/');
+  };
+  console.log('LOCATION', location);
+
   return (
     <div>
+      <button type="button" onClick={handleGoBack}>
+        {' '}
+        Go back
+      </button>
       {movie && (
         <>
           <div className={s.wrapper}>
             <div className={s.photoWrapper}>
               <img
                 className={s.photo}
-                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                src={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500/${movie.poster_path} `
+                    : 'https://media.comicbook.com/files/img/default-movie.png'
+                }
                 alt={movie.title}
               />
             </div>
@@ -54,23 +75,33 @@ function MovieDetailsPage() {
           <p>Additional Information</p>
           <ul>
             <li>
-              <NavLink to={`${url}/cast`}>Cast</NavLink>
+              <NavLink
+                to={{ pathname: `${url}/cast`, state: { from: location } }}
+              >
+                Cast
+              </NavLink>
             </li>
             <li>
-              <NavLink to={`${url}/reviews`}>Reviews</NavLink>
+              <NavLink
+                to={{ pathname: `${url}/reviews`, state: { from: location } }}
+              >
+                Reviews
+              </NavLink>
             </li>
           </ul>
 
           <hr />
 
-          <Switch>
-            <Route path={`${url}/cast`}>
-              <Cast movieId={movieId}></Cast>
-            </Route>
-            <Route path={`${url}/reviews`}>
-              <Reviews movieId={movieId}></Reviews>
-            </Route>
-          </Switch>
+          <Suspense fallback={<Loader />}>
+            <Switch>
+              <Route path={`${url}/cast`}>
+                <Cast movieId={movieId} page="/movies"></Cast>
+              </Route>
+              <Route path={`${url}/reviews`}>
+                <Reviews movieId={movieId} page="/movies"></Reviews>
+              </Route>
+            </Switch>
+          </Suspense>
           {/* <h1>{ movie.title}</h1>
             console.log('DETAILS') */}
         </>
