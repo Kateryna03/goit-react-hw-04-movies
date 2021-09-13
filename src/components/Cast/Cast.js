@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+//import { useLocation, useHistory } from 'react-router-dom';
 import * as moviesAPI from '../../services/Api';
 import s from './Cast.module.css';
 function Cast({ movieId }) {
   //const { url } = useRouteMatch();
   const [cast, setCast] = useState(null);
-  const location = useLocation();
-  const history = useHistory();
+  //const location = useLocation();
+  //const history = useHistory();
   //const { movieId } = useParams();
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function Cast({ movieId }) {
   console.log(cast);
 
   //history.push(location.state.from )
-  console.log(history);
+  //console.log(history);
 
   return (
     <>

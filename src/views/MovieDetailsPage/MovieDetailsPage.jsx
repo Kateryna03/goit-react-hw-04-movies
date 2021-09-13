@@ -14,8 +14,8 @@ import * as moviesAPI from '../../services/Api';
 //import Reviews from '../Reviews/Reviews';
 import Loader from '../../components/Loader/Loader';
 import s from './MovieDetailsPage.module.css';
-const Cast = lazy(() => import('../Cast/Cast.js'));
-const Reviews = lazy(() => import('../Reviews/Reviews.js'));
+const Cast = lazy(() => import('../../components/Cast/Cast.js'));
+const Reviews = lazy(() => import('../../components/Reviews/Reviews.js'));
 function MovieDetailsPage(page) {
   const history = useHistory();
   const location = useLocation();
