@@ -9,7 +9,10 @@ function Reviews({ movieId }) {
 
   useEffect(() => {
     //console.log(movies);
-    moviesAPI.fetchReviews(movieId).then(data => setReviews(data.results));
+    moviesAPI
+      .fetchReviews(movieId)
+      .then(data => setReviews(data.results))
+      .catch(error => console.log(error));
   }, [movieId]);
   console.log(reviews);
 

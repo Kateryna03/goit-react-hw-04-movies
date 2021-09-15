@@ -23,7 +23,10 @@ function MoviesPage() {
 
   useEffect(() => {
     if (!request) return;
-    moviesAPI.fetchSearch(request).then(data => setMovies(data.results));
+    moviesAPI
+      .fetchSearch(request)
+      .then(data => setMovies(data.results))
+      .catch(error => console.log(error));
   }, [request]);
   //console.log(movies);
 
@@ -35,6 +38,7 @@ function MoviesPage() {
     // if (request.trim() === '') {
     //   setRequest('');
     // } else {
+
     setRequest(query);
     setMovies([]);
     history.push({ ...location, search: `query=${query}` });
@@ -42,10 +46,8 @@ function MoviesPage() {
   //};
   return (
     <>
-      {/* <h1>MOVIES</h1> */}
       <Searchbar onSubmit={handleFormSubmit}></Searchbar>
       <MovieList movies={movies}></MovieList>
-      {/* page={`/movies?query=${request} */}
     </>
   );
 }

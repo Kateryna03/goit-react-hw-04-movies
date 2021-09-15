@@ -11,7 +11,10 @@ function Cast({ movieId }) {
 
   useEffect(() => {
     //console.log(movies);
-    moviesAPI.fetchCast(movieId).then(data => setCast(data.cast));
+    moviesAPI
+      .fetchCast(movieId)
+      .then(data => setCast(data.cast))
+      .catch(error => console.log(error));
   }, [movieId]);
   console.log(cast);
 

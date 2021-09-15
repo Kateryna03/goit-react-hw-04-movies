@@ -24,7 +24,10 @@ function MovieDetailsPage(page) {
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    moviesAPI.fetchMovieById(movieId).then(data => setMovie(data));
+    moviesAPI
+      .fetchMovieById(movieId)
+      .then(data => setMovie(data))
+      .catch(error => console.log(error));
   }, [movieId]);
   console.log(movie);
 
@@ -76,14 +79,21 @@ function MovieDetailsPage(page) {
           <ul>
             <li>
               <NavLink
-                to={{ pathname: `${url}/cast`, state: { from: location } }}
+                to={{
+                  pathname: `${url}/cast`,
+                  state: { from: location.state.from },
+                }}
               >
                 Cast
               </NavLink>
             </li>
             <li>
               <NavLink
-                to={{ pathname: `${url}/reviews`, state: { from: location } }}
+                to={{
+                  pathname: `${url}/reviews`,
+                  state: { from: location.state.from },
+                }}
+                //  во время перехода на вложенные маршруты cast и review нужно ложить в стейт локейшн который возвращает пользователя на страницу со списком с которого была открыта карточка, чтобы при клике на кнопку GoBack пользователь мог вернуться на эту страницу
               >
                 Reviews
               </NavLink>

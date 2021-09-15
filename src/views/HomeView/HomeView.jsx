@@ -8,7 +8,10 @@ function HomeView() {
 
   useEffect(() => {
     //console.log(movies);
-    moviesAPI.fetchTrendingToday().then(data => setMovies(data.results));
+    moviesAPI
+      .fetchTrendingToday()
+      .then(data => setMovies(data.results))
+      .catch(error => console.log(error));
   }, []);
   console.log(movies);
 
